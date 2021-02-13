@@ -1,4 +1,4 @@
-#!/Users/jzhang/Workspace/02_Courses/Coursera_TensorFlow_Data_and_Deployment_Spec/dlaicourse/venv/bin/python3
+#!/Users/jzhang/Workspace/02_Courses/Coursera_TensorFlow_Data_and_Deployment_Spec/dlaicourse/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
