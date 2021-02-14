@@ -1,0 +1,528 @@
+   0.0 TEL | Telepresence 0.109 launched at Sun Feb 14 00:30:31 2021
+   0.0 TEL |   /usr/local/bin/telepresence
+   0.0 TEL | uname: uname_result(system='Darwin', node='Ippens-MacBook-Pro.local', release='20.3.0', version='Darwin Kernel Version 20.3.0: Thu Jan 21 00:07:06 PST 2021; root:xnu-7195.81.3~1/RELEASE_X86_64', machine='x86_64', processor='i386')
+   0.0 TEL | Platform: darwin
+   0.0 TEL | WSL: False
+   0.0 TEL | Python 3.8.7 (default, Feb 13 2021, 23:13:49)
+   0.0 TEL | [Clang 12.0.0 (clang-1200.0.32.29)]
+   0.0 TEL | BEGIN SPAN main.py:40(main)
+   0.0 TEL | BEGIN SPAN startup.py:83(set_kube_command)
+   0.0 TEL | Found kubectl -> /usr/local/bin/kubectl
+   0.0 TEL | [1] Capturing: kubectl config current-context
+   0.2 TEL | [1] captured in 0.16 secs.
+   0.2 TEL | [2] Capturing: kubectl --context production version --short
+   1.8 TEL | [2] captured in 1.63 secs.
+   1.8 TEL | [3] Capturing: kubectl --context production config view -o json
+   1.9 TEL | [3] captured in 0.08 secs.
+   1.9 TEL | [4] Capturing: kubectl --context production api-versions
+   2.6 TEL | [4] captured in 0.75 secs.
+   2.6 TEL | Command: kubectl 1.20.2
+   2.6 TEL | Context: production, namespace: ict-services, version: 1.17.12-eks-7684af
+   2.6 >>> | Warning: kubectl 1.20.2 may not work correctly with cluster version 1.17.12-eks-7684af due to the version discrepancy. See https://kubernetes.io/docs/setup/version-skew-policy/ for more information.
+   2.6 >>> | 
+   2.6 TEL | END SPAN startup.py:83(set_kube_command)    2.6s
+   2.6 >>> | Using a Pod instead of a Deployment for the Telepresence proxy. If you experience problems, please file an issue!
+   2.6 >>> | Set the environment variable TELEPRESENCE_USE_DEPLOYMENT to any non-empty value to force the old behavior, e.g.,
+   2.6 >>> |     env TELEPRESENCE_USE_DEPLOYMENT=1 telepresence --run curl hello
+   2.6 >>> | 
+   2.6 TEL | Found ssh -> /usr/bin/ssh
+   2.6 TEL | [5] Capturing: ssh -V
+   2.7 TEL | [5] captured in 0.01 secs.
+   2.7 TEL | Found bash -> /bin/bash
+   2.7 TEL | Found sshuttle-telepresence -> /usr/local/Cellar/telepresence/0.109/libexec/sshuttle-telepresence
+   2.7 TEL | Found pfctl -> /sbin/pfctl
+   2.7 TEL | Found sudo -> /usr/bin/sudo
+   2.7 TEL | [6] Running: sudo -n echo -n
+   2.8   6 | sudo: a password is required
+   2.8 TEL | [6] exit 1 in 0.09 secs.
+   2.8 >>> | How Telepresence uses sudo: https://www.telepresence.io/reference/install#dependencies
+   2.8 >>> | Invoking sudo. Please enter your sudo password.
+   2.8 TEL | [7] Running: sudo echo -n
+   8.6 TEL | [7] ran in 5.87 secs.
+   8.6 >>> | Starting proxy with method 'vpn-tcp', which has the following limitations: All processes are affected, only one telepresence can run per machine, and you can't use other VPNs. You may need to add cloud hosts and headless services with --also-proxy. For a full list of method limitations see https://telepresence.io/reference/methods.html
+   8.6 TEL | Found sshfs -> /usr/local/bin/sshfs
+   8.6 TEL | Found umount -> /sbin/umount
+   8.6 >>> | Volumes are rooted at $TELEPRESENCE_ROOT. See https://telepresence.io/howto/volumes.html for details.
+   8.6 TEL | [8] Running: kubectl --context production --namespace ict-services get pods telepresence-connectivity-check --ignore-not-found
+  11.9 TEL | [8] ran in 3.26 secs.
+  12.7 TEL | Scout info: {'latest_version': '0.109', 'application': 'telepresence', 'notices': []}
+  12.7 >>> | Starting network proxy to cluster using new Pod telepresence-1613259031-1175702-9023
+  12.7 TEL | [9] Running: kubectl --context production --namespace ict-services create -f -
+  14.3   9 | pod/telepresence-1613259031-1175702-9023 created
+  14.3 TEL | [9] ran in 1.59 secs.
+  14.3 TEL | BEGIN SPAN remote.py:109(wait_for_pod)
+  14.3 TEL | [10] Running: kubectl --context production --namespace ict-services wait --for=condition=ready --timeout=60s pod/telepresence-1613259031-1175702-9023
+  20.8  10 | pod/telepresence-1613259031-1175702-9023 condition met
+  20.8 TEL | [10] ran in 6.49 secs.
+  20.8 TEL | [11] Capturing: kubectl --context production --namespace ict-services get pod telepresence-1613259031-1175702-9023 -o json
+  21.4 TEL | [11] captured in 0.65 secs.
+  21.4 TEL | END SPAN remote.py:109(wait_for_pod)    7.1s
+  21.4 TEL | BEGIN SPAN connect.py:37(connect)
+  21.4 TEL | [12] Launching kubectl logs: kubectl --context production --namespace ict-services logs -f telepresence-1613259031-1175702-9023 --container telepresence --tail=10
+  21.4 TEL | [13] Launching kubectl port-forward: kubectl --context production --namespace ict-services port-forward telepresence-1613259031-1175702-9023 51228:8022
+  21.4 TEL | [14] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 51228 telepresence@127.0.0.1 /bin/true
+  21.4 TEL | [14] exit 255 in 0.01 secs.
+  21.7 TEL | [15] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 51228 telepresence@127.0.0.1 /bin/true
+  21.7 TEL | [15] exit 255 in 0.01 secs.
+  22.0 TEL | [16] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 51228 telepresence@127.0.0.1 /bin/true
+  22.0 TEL | [16] exit 255 in 0.01 secs.
+  22.2  12 | 2021-02-13T23:30:52+0000 [-] Loading ./forwarder.py...
+  22.2  12 | 2021-02-13T23:30:52+0000 [-] /etc/resolv.conf changed, reparsing
+  22.2  12 | 2021-02-13T23:30:52+0000 [-] Resolver added ('172.20.0.10', 53) to server list
+  22.2  12 | 2021-02-13T23:30:52+0000 [-] SOCKSv5Factory starting on 9050
+  22.2  12 | 2021-02-13T23:30:52+0000 [socks.SOCKSv5Factory#info] Starting factory <socks.SOCKSv5Factory object at 0x7efcae5c88d0>
+  22.2  12 | 2021-02-13T23:30:52+0000 [-] DNSDatagramProtocol starting on 9053
+  22.2  12 | 2021-02-13T23:30:52+0000 [-] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7efcae5c8ba8>
+  22.2  12 | 2021-02-13T23:30:52+0000 [-] Loaded.
+  22.2  12 | 2021-02-13T23:30:52+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] twistd 20.3.0 (/usr/bin/python3.6 3.6.8) starting up.
+  22.2  12 | 2021-02-13T23:30:52+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] reactor class: twisted.internet.epollreactor.EPollReactor.
+  22.2 TEL | [17] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 51228 telepresence@127.0.0.1 /bin/true
+  22.2 TEL | [17] exit 255 in 0.01 secs.
+  22.3  13 | Forwarding from 127.0.0.1:51228 -> 8022
+  22.3  13 | Forwarding from [::1]:51228 -> 8022
+  22.5 TEL | [18] Running: ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 51228 telepresence@127.0.0.1 /bin/true
+  22.5  13 | Handling connection for 51228
+  22.8 TEL | [18] ran in 0.33 secs.
+  22.8 >>> | 
+  22.8 >>> | No traffic is being forwarded from the remote Deployment to your local machine. You can use the --expose option to specify which ports you want to forward.
+  22.8 >>> | 
+  22.8 TEL | Launching Web server for proxy poll
+  22.8 TEL | [19] Launching SSH port forward (socks and proxy poll): ssh -N -oServerAliveInterval=1 -oServerAliveCountMax=10 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 -q -p 51228 telepresence@127.0.0.1 -L127.0.0.1:51245:127.0.0.1:9050 -R9055:127.0.0.1:51246
+  22.8 TEL | END SPAN connect.py:37(connect)    1.4s
+  22.8 TEL | BEGIN SPAN remote_env.py:29(get_remote_env)
+  22.8 TEL | [20] Capturing: kubectl --context production --namespace ict-services exec telepresence-1613259031-1175702-9023 --container telepresence -- python3 podinfo.py
+  22.8  13 | Handling connection for 51228
+  23.8 TEL | [20] captured in 1.01 secs.
+  23.8 TEL | END SPAN remote_env.py:29(get_remote_env)    1.0s
+  23.9 TEL | BEGIN SPAN mount.py:30(mount_remote_volumes)
+  23.9 TEL | [21] Running: sshfs -p 51228 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5 telepresence@127.0.0.1:/ /tmp/tel-stvt8q2l/fs
+  24.9  13 | Handling connection for 51228
+  25.3 TEL | [21] ran in 1.41 secs.
+  25.3 TEL | END SPAN mount.py:30(mount_remote_volumes)    1.4s
+  25.3 TEL | BEGIN SPAN vpn.py:62(connect_sshuttle)
+  25.3 TEL | BEGIN SPAN cidr.py:113(get_proxy_cidrs)
+  25.3 TEL | [22] Capturing: kubectl --context production --namespace ict-services get nodes -o json
+  26.1 TEL | [22] captured in 0.79 secs.
+  26.1 TEL | [23] Capturing: kubectl --context production --namespace ict-services get pods --all-namespaces -o json
+  27.3  23 | W0214 00:30:58.404048    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1001 clients constructed calling "aws"
+  27.3  23 | W0214 00:30:58.404271    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1002 clients constructed calling "aws"
+  27.3  23 | W0214 00:30:58.404411    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1003 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.481847    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1004 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.482265    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1005 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.482656    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1006 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.483054    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1007 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.483460    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1008 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.483930    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1009 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.484131    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1010 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.484320    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1011 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.484545    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1012 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.484758    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1013 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.484915    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1014 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.485096    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1015 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.485277    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1016 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.485442    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1017 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.485623    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1018 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.485788    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1019 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.485960    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1020 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.486116    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1021 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.486272    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1022 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.486427    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1023 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.486578    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1024 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.486786    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1025 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.486958    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1026 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.487140    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1027 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.487321    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1028 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.487522    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1029 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.487704    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1030 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.487868    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1031 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.488026    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1032 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.488192    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1033 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.488350    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1034 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.488514    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1035 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.488695    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1036 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.488841    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1037 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.488987    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1038 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.489140    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1039 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.489312    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1040 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.489478    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1041 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.489626    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1042 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.489771    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1043 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.489925    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1044 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.490071    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1045 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.490220    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1046 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.490368    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1047 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.490533    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1048 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.490673    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1049 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.490817    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1050 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.490960    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1051 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.491100    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1052 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.491239    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1053 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.491373    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1054 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.491526    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1055 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.491660    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1056 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.491793    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1057 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.491926    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1058 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.492060    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1059 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.492196    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1060 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.492328    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1061 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.492477    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1062 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.492607    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1063 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.492745    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1064 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.492876    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1065 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493003    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1066 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493130    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1067 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493259    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1068 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493386    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1069 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493513    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1070 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493640    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1071 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493768    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1072 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.493896    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1073 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494027    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1074 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494162    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1075 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494300    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1076 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494427    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1077 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494558    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1078 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494701    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1079 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494832    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1080 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.494959    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1081 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.495094    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1082 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.495222    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1083 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.495357    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1084 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.495493    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1085 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.495621    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1086 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.495752    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1087 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.495882    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1088 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.496010    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1089 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.496138    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1090 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.496267    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1091 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.496395    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1092 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.496538    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1093 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.496737    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1094 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.496950    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1095 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.497080    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1096 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.497208    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1097 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.497334    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1098 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.497460    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1099 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.497589    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1100 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.497751    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1101 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.497876    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1102 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498004    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1103 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498129    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1104 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498257    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1105 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498397    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1106 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498526    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1107 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498655    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1108 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498785    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1109 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.498948    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1110 clients constructed calling "aws"
+  27.4  23 | W0214 00:30:58.499075    9136 exec.go:282] constructing many client instances from the same exec auth config can cause performance problems during cert rotation and can exhaust available network connections; 1111 clients constructed calling "aws"
+  28.1 TEL | [23] captured in 2.08 secs.
+  28.3 TEL | [24] Capturing: kubectl --context production --namespace ict-services get pods -n kube-system -o json
+  29.3 TEL | [24] captured in 0.97 secs.
+  29.3 TEL | [25] Capturing: kubectl --context production --namespace ict-services get services -o json
+  29.9 TEL | [25] captured in 0.63 secs.
+  29.9 TEL | [26] Running: kubectl --context production --namespace ict-services create service clusterip telepresence-1613259061-0175629-9023 --tcp=3000
+  30.5  26 | service/telepresence-1613259061-0175629-9023 created
+  30.5 TEL | [26] ran in 0.64 secs.
+  30.5 TEL | [27] Running: kubectl --context production --namespace ict-services create service clusterip telepresence-1613259061-653074-9023 --tcp=3000
+  31.2  27 | service/telepresence-1613259061-653074-9023 created
+  31.2 TEL | [27] ran in 0.65 secs.
+  31.2 TEL | [28] Running: kubectl --context production --namespace ict-services create service clusterip telepresence-1613259062-3040519-9023 --tcp=3000
+  31.8  28 | service/telepresence-1613259062-3040519-9023 created
+  31.8 TEL | [28] ran in 0.64 secs.
+  31.8 TEL | [29] Running: kubectl --context production --namespace ict-services create service clusterip telepresence-1613259062-9470878-9023 --tcp=3000
+  32.5  29 | service/telepresence-1613259062-9470878-9023 created
+  32.5 TEL | [29] ran in 0.63 secs.
+  32.5 TEL | [30] Running: kubectl --context production --namespace ict-services create service clusterip telepresence-1613259063-579369-9023 --tcp=3000
+  33.1  30 | service/telepresence-1613259063-579369-9023 created
+  33.1 TEL | [30] ran in 0.63 secs.
+  33.1 TEL | [31] Capturing: kubectl --context production --namespace ict-services get services -o json
+  33.7 TEL | [31] captured in 0.65 secs.
+  33.7 TEL | [32] Running: kubectl --context production --namespace ict-services delete service telepresence-1613259061-0175629-9023
+  34.4  32 | service "telepresence-1613259061-0175629-9023" deleted
+  34.5 TEL | [32] ran in 0.72 secs.
+  34.5 TEL | [33] Running: kubectl --context production --namespace ict-services delete service telepresence-1613259061-653074-9023
+  35.1  33 | service "telepresence-1613259061-653074-9023" deleted
+  35.2 TEL | [33] ran in 0.74 secs.
+  35.2 TEL | [34] Running: kubectl --context production --namespace ict-services delete service telepresence-1613259062-3040519-9023
+  35.9  34 | service "telepresence-1613259062-3040519-9023" deleted
+  35.9 TEL | [34] ran in 0.72 secs.
+  35.9 TEL | [35] Running: kubectl --context production --namespace ict-services delete service telepresence-1613259062-9470878-9023
+  36.6  35 | service "telepresence-1613259062-9470878-9023" deleted
+  36.7 TEL | [35] ran in 0.73 secs.
+  36.7 TEL | [36] Running: kubectl --context production --namespace ict-services delete service telepresence-1613259063-579369-9023
+  37.3  36 | service "telepresence-1613259063-579369-9023" deleted
+  37.4 TEL | [36] ran in 0.73 secs.
+  37.4 >>> | Guessing that Services IP range is ['172.20.0.0/16']. Services started after this point will be inaccessible if are outside this range; restart telepresence if you can't access a new Service.
+  37.4 TEL | END SPAN cidr.py:113(get_proxy_cidrs)   12.1s
+  37.4 TEL | [37] Launching sshuttle: sshuttle-telepresence -v --dns --method auto -e 'ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oConnectTimeout=5' -r telepresence@127.0.0.1:51228 --to-ns 127.0.0.1:9053 172.20.0.0/16 10.195.0.0/16
+  37.4 TEL | BEGIN SPAN vpn.py:85(connect_sshuttle,sshuttle-wait)
+  37.4 TEL | Wait for vpn-tcp connection: hellotelepresence-0
+  37.4 TEL | [38] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0")'
+  37.5 TEL | [38] exit 1 in 0.07 secs.
+  37.5 TEL | [39] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0.a.sanity.check.telepresence.io")'
+  37.6 TEL | [39] exit 1 in 0.12 secs.
+  37.7 TEL | Wait for vpn-tcp connection: hellotelepresence-1
+  37.7 TEL | [40] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1")'
+  37.7 TEL | [40] exit 1 in 0.04 secs.
+  37.7 TEL | [41] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1.a.sanity.check.telepresence.io")'
+  38.0  37 | /Users/jzhang/.pex/installed_wheels/b9a99f237adb2ba53a57e284de2521655b6ed14e/sshuttle_telepresence-0.78.2.dev45+gd250ccb-py2.py3-none-any.whl/sshuttle/ssh.py:72: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  38.0  37 |   if result[1] is not '':
+  38.0  37 | Starting sshuttle proxy.
+  38.0 TEL | [41] exit 1 in 0.22 secs.
+  38.1 TEL | Wait for vpn-tcp connection: hellotelepresence-2
+  38.1 TEL | [42] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2")'
+  38.1 TEL | [42] exit 1 in 0.04 secs.
+  38.1 TEL | [43] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2.a.sanity.check.telepresence.io")'
+  38.2 TEL | [43] exit 1 in 0.12 secs.
+  38.3 TEL | Wait for vpn-tcp connection: hellotelepresence-3
+  38.3 TEL | [44] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3")'
+  38.4 TEL | [44] exit 1 in 0.07 secs.
+  38.4 TEL | [45] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3.a.sanity.check.telepresence.io")'
+  38.6 TEL | [45] exit 1 in 0.18 secs.
+  38.7 TEL | Wait for vpn-tcp connection: hellotelepresence-4
+  38.7 TEL | [46] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4")'
+  38.7 TEL | [47] Running: sudo -n echo -n
+  38.7 TEL | [47] ran in 0.03 secs.
+  38.8 TEL | [46] exit 1 in 0.07 secs.
+  38.8 TEL | [48] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4.a.sanity.check.telepresence.io")'
+  38.9  37 | firewall manager: Starting firewall with Python version 3.8.7
+  38.9  37 | firewall manager: ready method name pf.
+  38.9  37 | IPv6 enabled: True
+  38.9  37 | UDP enabled: False
+  38.9  37 | DNS enabled: True
+  38.9  37 | TCP redirector listening on ('::1', 12300, 0, 0).
+  38.9  37 | TCP redirector listening on ('127.0.0.1', 12300).
+  38.9  37 | DNS listening on ('::1', 12300, 0, 0).
+  38.9  37 | DNS listening on ('127.0.0.1', 12300).
+  38.9  37 | Starting client with Python version 3.8.7
+  38.9  37 | c : connecting to server...
+  38.9 TEL | [48] exit 1 in 0.12 secs.
+  38.9  13 | Handling connection for 51228
+  39.0 TEL | Wait for vpn-tcp connection: hellotelepresence-5
+  39.0 TEL | [49] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5")'
+  39.0  37 | Warning: Permanently added '[127.0.0.1]:51228' (ECDSA) to the list of known hosts.
+  39.1 TEL | [49] exit 1 in 0.08 secs.
+  39.1 TEL | [50] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5.a.sanity.check.telepresence.io")'
+  39.2 TEL | [50] exit 1 in 0.12 secs.
+  39.3  37 | Starting server with Python version 3.6.8
+  39.3  37 |  s: latency control setting = True
+  39.3  37 |  s: available routes:
+  39.3  37 | c : Connected.
+  39.3  37 | firewall manager: setting up.
+  39.3  37 | >> pfctl -s Interfaces -i lo -v
+  39.3 TEL | Wait for vpn-tcp connection: hellotelepresence-6
+  39.3 TEL | [51] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6")'
+  39.3  37 | >> pfctl -s all
+  39.3  37 | >> pfctl -a sshuttle6-12300 -f /dev/stdin
+  39.3  37 | >> pfctl -E
+  39.3  37 | >> pfctl -s Interfaces -i lo -v
+  39.3  37 | >> pfctl -s all
+  39.3  37 | >> pfctl -a sshuttle-12300 -f /dev/stdin
+  39.3  37 | >> pfctl -E
+  39.4 TEL | [51] exit 1 in 0.07 secs.
+  39.4 TEL | [52] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6.a.sanity.check.telepresence.io")'
+  39.4  37 | c : DNS request from ('192.168.1.4', 50690) to None: 68 bytes
+  39.4  12 | 2021-02-13T23:31:10+0000 [stdout#info] Sanity check: b'hellotelepresence-6.a.sanity.check.telepresence.io'
+  39.4 TEL | [52] exit 1 in 0.08 secs.
+  39.5 TEL | Wait for vpn-tcp connection: hellotelepresence-7
+  39.5 TEL | [53] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7")'
+  39.6  37 | c : DNS request from ('192.168.1.4', 50152) to None: 37 bytes
+  39.6  12 | 2021-02-13T23:31:10+0000 [stdout#info] Set DNS suffix we filter out to: [()]
+  39.6  12 | 2021-02-13T23:31:10+0000 [stdout#info] Result for b'hellotelepresence-7' is ['127.0.0.1']
+  39.6 TEL | [53] captured in 0.07 secs.
+  39.6 TEL | Resolved hellotelepresence-7. 2 more...
+  39.6 TEL | [54] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7.a.sanity.check.telepresence.io")'
+  39.6  37 | c : DNS request from ('192.168.1.4', 63555) to None: 68 bytes
+  39.7  12 | 2021-02-13T23:31:10+0000 [stdout#info] Sanity check: b'hellotelepresence-7.a.sanity.check.telepresence.io'
+  39.7 TEL | [54] exit 1 in 0.07 secs.
+  39.8 TEL | Wait for vpn-tcp connection: hellotelepresence-8
+  39.8 TEL | [55] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8")'
+  39.8  37 | c : DNS request from ('192.168.1.4', 57772) to None: 37 bytes
+  39.8  12 | 2021-02-13T23:31:10+0000 [stdout#info] Result for b'hellotelepresence-8' is ['127.0.0.1']
+  39.9 TEL | [55] captured in 0.07 secs.
+  39.9 TEL | Resolved hellotelepresence-8. 1 more...
+  39.9 TEL | [56] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8.a.sanity.check.telepresence.io")'
+  39.9  37 | c : DNS request from ('192.168.1.4', 53778) to None: 68 bytes
+  39.9  12 | 2021-02-13T23:31:11+0000 [stdout#info] Sanity check: b'hellotelepresence-8.a.sanity.check.telepresence.io'
+  39.9 TEL | [56] exit 1 in 0.07 secs.
+  40.0 TEL | Wait for vpn-tcp connection: hellotelepresence-9
+  40.0 TEL | [57] Capturing: python3 -c 'import socket; socket.gethostbyname("hellotelepresence-9")'
+  40.1  37 | c : DNS request from ('192.168.1.4', 49855) to None: 37 bytes
+  40.1  12 | 2021-02-13T23:31:11+0000 [stdout#info] Result for b'hellotelepresence-9' is ['127.0.0.1']
+  40.1 TEL | [57] captured in 0.07 secs.
+  40.1 TEL | Resolved hellotelepresence-9. 0 more...
+  40.1 TEL | END SPAN vpn.py:85(connect_sshuttle,sshuttle-wait)    2.7s
+  40.1 TEL | END SPAN vpn.py:62(connect_sshuttle)   14.8s
+  40.1 >>> | Connected. Flushing DNS cache.
+  40.1 TEL | [58] Running: sudo -n /usr/bin/pkill -HUP mDNSResponder
+  40.2  37 | c : DNS request from ('192.168.1.4', 51321) to None: 58 bytes
+  40.2  37 | c : DNS request from ('192.168.1.4', 50200) to None: 57 bytes
+  40.2  37 | c : DNS request from ('192.168.1.4', 64087) to None: 58 bytes
+  40.2 TEL | [58] ran in 0.07 secs.
+  40.2  12 | 2021-02-13T23:31:11+0000 [stdout#info] 12 query: b'lb._dns-sd._udp.0.1.168.192.in-addr.arpa'
+  40.2  12 | 2021-02-13T23:31:11+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 26706
+  40.2  12 | 2021-02-13T23:31:11+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7efcae5d4470>
+  40.2  12 | 2021-02-13T23:31:11+0000 [stdout#info] 12 query: b'b._dns-sd._udp.0.1.168.192.in-addr.arpa'
+  40.2  12 | 2021-02-13T23:31:11+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 49522
+  40.2  12 | 2021-02-13T23:31:11+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7efcae5d4668>
+  40.2  12 | 2021-02-13T23:31:11+0000 [-] (UDP Port 26706 Closed)
+  40.2  12 | 2021-02-13T23:31:11+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7efcae5d4470>
+  40.2  12 | 2021-02-13T23:31:11+0000 [-] (UDP Port 49522 Closed)
+  40.2  12 | 2021-02-13T23:31:11+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7efcae5d4668>
+  40.2  12 | 2021-02-13T23:31:11+0000 [stdout#info] 12 query: b'db._dns-sd._udp.0.1.168.192.in-addr.arpa'
+  40.2  12 | 2021-02-13T23:31:11+0000 [DNSDatagramProtocol (UDP)] DNSDatagramProtocol starting on 1135
+  40.2  12 | 2021-02-13T23:31:11+0000 [DNSDatagramProtocol (UDP)] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7efcae5d4828>
+  40.2  12 | 2021-02-13T23:31:11+0000 [-] (UDP Port 1135 Closed)
+  40.2  12 | 2021-02-13T23:31:11+0000 [-] Stopping protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7efcae5d4828>
+  42.7  37 | c : DNS request from ('192.168.1.4', 57937) to None: 46 bytes
+  42.7  12 | 2021-02-13T23:31:13+0000 [stdout#info] A query: b'fcmconnection.googleapis.com'
+  42.7  12 | 2021-02-13T23:31:13+0000 [stdout#info] Result for b'fcmconnection.googleapis.com' is ['142.250.185.234']
+  43.8 >>> | Setup complete. Launching your command.
+  43.8 TEL | Everything launched. Waiting to exit...
+  43.8 TEL | BEGIN SPAN runner.py:754(wait_for_exit)
+  45.8  37 | c : DNS request from ('192.168.1.4', 50309) to None: 47 bytes
+  45.8  12 | 2021-02-13T23:31:16+0000 [stdout#info] A query: b'addons-pa.clients6.google.com'
+  45.8  37 | c : DNS request from ('192.168.1.4', 49490) to None: 33 bytes
+  45.8  12 | 2021-02-13T23:31:16+0000 [stdout#info] Result for b'addons-pa.clients6.google.com' is ['142.250.185.202']
+  45.8  12 | 2021-02-13T23:31:16+0000 [stdout#info] A query: b'play.google.com'
+  45.8  12 | 2021-02-13T23:31:16+0000 [stdout#info] Result for b'play.google.com' is ['142.250.185.142']
+  51.4 TEL | (proxy checking local liveness)
+  51.4  12 | 2021-02-13T23:31:22+0000 [Poll#info] Checkpoint
+  57.8  37 | c : DNS request from ('192.168.1.4', 53153) to None: 46 bytes
+  57.8  12 | 2021-02-13T23:31:28+0000 [stdout#info] A query: b'fcmconnection.googleapis.com'
+  57.8  12 | 2021-02-13T23:31:28+0000 [stdout#info] Result for b'fcmconnection.googleapis.com' is ['142.250.185.138']
+  61.6  37 | c : DNS request from ('192.168.1.4', 61416) to None: 29 bytes
+  61.6  37 | c : DNS request from ('192.168.1.4', 60691) to None: 29 bytes
+  61.6  12 | 2021-02-13T23:31:32+0000 [stdout#info] A query: b'rc.kite.com'
+  61.6  12 | 2021-02-13T23:31:32+0000 [stdout#info] AAAA query, sending back A instead: b'rc.kite.com'
+  61.6  12 | 2021-02-13T23:31:32+0000 [stdout#info] A query: b'rc.kite.com'
+  61.6  12 | 2021-02-13T23:31:32+0000 [stdout#info] Result for b'rc.kite.com' is ['34.107.247.156']
+  61.6  12 | 2021-02-13T23:31:32+0000 [stdout#info] Result for b'rc.kite.com' is ['34.107.247.156']
+  66.3  37 | c : DNS request from ('192.168.1.4', 43516) to None: 37 bytes
+  66.3  12 | 2021-02-13T23:31:37+0000 [stdout#info] A query: b'calendar.google.com'
+  66.4  12 | 2021-02-13T23:31:37+0000 [stdout#info] Result for b'calendar.google.com' is ['142.250.185.78']
+  67.0  37 | c : DNS request from ('192.168.1.4', 51688) to None: 31 bytes
+  67.0  12 | 2021-02-13T23:31:38+0000 [stdout#info] A query: b'www.notion.so'
+  67.0  12 | 2021-02-13T23:31:38+0000 [stdout#info] Result for b'www.notion.so' is ['104.18.23.110', '104.18.22.110']
+  68.8 TEL | [59] Running: sudo -n echo -n
+  68.8 TEL | [59] ran in 0.03 secs.
+  72.7  37 | c : DNS request from ('192.168.1.4', 64959) to None: 46 bytes
+  72.7  12 | 2021-02-13T23:31:43+0000 [stdout#info] A query: b'fcmconnection.googleapis.com'
+  72.7  12 | 2021-02-13T23:31:43+0000 [stdout#info] Result for b'fcmconnection.googleapis.com' is ['142.250.185.138']
+  74.7 TEL | Main process (bash --norc)
+  74.7 TEL |  exited with code 0.
+  74.8 TEL | END SPAN runner.py:754(wait_for_exit)   31.0s
+  74.8 >>> | Your process has exited.
+  74.8 TEL | EXITING successful session.
+  74.8 >>> | Exit cleanup in progress
+  74.8 TEL | (Cleanup) Terminate local process
+  74.8 TEL | Local process is already dead (ret=0)
+  74.8 TEL | (Cleanup) Kill BG process [37] sshuttle
+  74.8 TEL | (Cleanup) Unmount remote filesystem
+  74.8 TEL | [60] Running: umount -f /tmp/tel-stvt8q2l/fs
+  74.8  37 | >> pfctl -a sshuttle6-12300 -F all
+  74.8  37 | >> pfctl -X 7780950163702428825
+  74.8  37 | >> pfctl -a sshuttle-12300 -F all
+  74.8  37 | >> pfctl -X 7780950163762476505
+  74.8 TEL | [60] ran in 0.05 secs.
+  74.8 TEL | (Cleanup) Kill BG process [19] SSH port forward (socks and proxy poll)
+  74.8 TEL | [19] SSH port forward (socks and proxy poll): exit 0
+  74.8 TEL | [37] sshuttle: exit -15
+  74.8 TEL | (Cleanup) Kill Web server for proxy poll
+  75.0 TEL | (Cleanup) Kill BG process [13] kubectl port-forward
+  75.0 TEL | [13] kubectl port-forward: exit -15
+  75.0 TEL | (Cleanup) Kill BG process [12] kubectl logs
+  75.0 TEL | [12] kubectl logs: exit -15
+  75.0 TEL | Background process (kubectl logs) exited with return code -15. Command was:
+  75.0 TEL |   kubectl --context production --namespace ict-services logs -f telepresence-1613259031-1175702-9023 --container telepresence --tail=10
+  75.0 TEL | 
+  75.0 TEL | Recent output was:
+  75.0 TEL |   2021-02-13T23:31:32+0000 [stdout#info] AAAA query, sending back A instead: b'rc.kite.com'
+  75.0 TEL |   2021-02-13T23:31:32+0000 [stdout#info] A query: b'rc.kite.com'
+  75.0 TEL |   2021-02-13T23:31:32+0000 [stdout#info] Result for b'rc.kite.com' is ['34.107.247.156']
+  75.0 TEL |   2021-02-13T23:31:32+0000 [stdout#info] Result for b'rc.kite.com' is ['34.107.247.156']
+  75.0 TEL |   2021-02-13T23:31:37+0000 [stdout#info] A query: b'calendar.google.com'
+  75.0 TEL |   2021-02-13T23:31:37+0000 [stdout#info] Result for b'calendar.google.com' is ['142.250.185.78']
+  75.0 TEL |   2021-02-13T23:31:38+0000 [stdout#info] A query: b'www.notion.so'
+  75.0 TEL |   2021-02-13T23:31:38+0000 [stdout#info] Result for b'www.notion.so' is ['104.18.23.110', '104.18.22.110']
+  75.0 TEL |   2021-02-13T23:31:43+0000 [stdout#info] A query: b'fcmconnection.googleapis.com'
+  75.0 TEL |   2021-02-13T23:31:43+0000 [stdout#info] Result for b'fcmconnection.googleapis.com' is ['142.250.185.138']
+  75.0 TEL | (Cleanup) Delete proxy Pod
+  75.0 >>> | Cleaning up Pod
+  75.0 TEL | [61] Running: kubectl --context production --namespace ict-services delete --ignore-not-found --wait=false --selector=telepresence=909d45abdd9e4849ab4f9097adbace4c Pod
+  76.0  61 | pod "telepresence-1613259031-1175702-9023" deleted
+  76.0 TEL | [61] ran in 1.02 secs.
+  76.0 TEL | (Cleanup) Kill sudo privileges holder
+  76.0 TEL | (Cleanup) Stop time tracking
+  76.0 TEL | END SPAN main.py:40(main)   76.0s
+  76.0 TEL | SPAN SUMMARY:
+  76.0 TEL |   76.0s main.py:40(main)
+  76.0 TEL |    2.6s   startup.py:83(set_kube_command)
+  76.0 TEL |    0.2s     1 kubectl config current-context
+  76.0 TEL |    1.6s     2 kubectl --context production version --short
+  76.0 TEL |    0.1s     3 kubectl --context production config view -o json
+  76.0 TEL |    0.8s     4 kubectl --context production api-versions
+  76.0 TEL |    0.0s   5 ssh -V
+  76.0 TEL |    0.1s   6 sudo -n echo -n
+  76.0 TEL |    5.9s   7 sudo echo -n
+  76.0 TEL |    3.3s   8 kubectl --context production --namespace ict-services get pods telepresence-co
+  76.0 TEL |    1.6s   9 kubectl --context production --namespace ict-services create -f -
+  76.0 TEL |    7.1s   remote.py:109(wait_for_pod)
+  76.0 TEL |    6.5s     10 kubectl --context production --namespace ict-services wait --for=condition=re
+  76.0 TEL |    0.6s     11 kubectl --context production --namespace ict-services get pod telepresence-16
+  76.0 TEL |    1.4s   connect.py:37(connect)
+  76.0 TEL |    0.0s     14 ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -o
+  76.0 TEL |    0.0s     15 ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -o
+  76.0 TEL |    0.0s     16 ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -o
+  76.0 TEL |    0.0s     17 ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -o
+  76.0 TEL |    0.3s     18 ssh -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -o
+  76.0 TEL |    1.0s   remote_env.py:29(get_remote_env)
+  76.0 TEL |    1.0s     20 kubectl --context production --namespace ict-services exec telepresence-16132
+  76.0 TEL |    1.4s   mount.py:30(mount_remote_volumes)
+  76.0 TEL |    1.4s     21 sshfs -p 51228 -F /dev/null -oStrictHostKeyChecking=no -oUserKnownHostsFile=/
+  76.0 TEL |   14.8s   vpn.py:62(connect_sshuttle)
+  76.0 TEL |   12.1s     cidr.py:113(get_proxy_cidrs)
+  76.0 TEL |    0.8s       22 kubectl --context production --namespace ict-services get nodes -o json
+  76.0 TEL |    2.1s       23 kubectl --context production --namespace ict-services get pods --all-namespac
+  76.0 TEL |    1.0s       24 kubectl --context production --namespace ict-services get pods -n kube-system
+  76.0 TEL |    0.6s       25 kubectl --context production --namespace ict-services get services -o json
+  76.0 TEL |    0.6s       26 kubectl --context production --namespace ict-services create service clusteri
+  76.0 TEL |    0.7s       27 kubectl --context production --namespace ict-services create service clusteri
+  76.0 TEL |    0.6s       28 kubectl --context production --namespace ict-services create service clusteri
+  76.0 TEL |    0.6s       29 kubectl --context production --namespace ict-services create service clusteri
+  76.0 TEL |    0.6s       30 kubectl --context production --namespace ict-services create service clusteri
+  76.0 TEL |    0.6s       31 kubectl --context production --namespace ict-services get services -o json
+  76.0 TEL |    0.7s       32 kubectl --context production --namespace ict-services delete service telepres
+  76.0 TEL |    0.7s       33 kubectl --context production --namespace ict-services delete service telepres
+  76.0 TEL |    0.7s       34 kubectl --context production --namespace ict-services delete service telepres
+  76.0 TEL |    0.7s       35 kubectl --context production --namespace ict-services delete service telepres
+  76.0 TEL |    0.7s       36 kubectl --context production --namespace ict-services delete service telepres
+  76.0 TEL |    2.7s     vpn.py:85(connect_sshuttle,sshuttle-wait)
+  76.0 TEL |    0.1s       38 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0")'
+  76.0 TEL |    0.1s       39 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-0.a.sanity
+  76.0 TEL |    0.0s       40 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1")'
+  76.0 TEL |    0.2s       41 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-1.a.sanity
+  76.0 TEL |    0.0s       42 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2")'
+  76.0 TEL |    0.1s       43 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-2.a.sanity
+  76.0 TEL |    0.1s       44 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3")'
+  76.0 TEL |    0.2s       45 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-3.a.sanity
+  76.0 TEL |    0.1s       46 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4")'
+  76.0 TEL |    0.0s         47 sudo -n echo -n
+  76.0 TEL |    0.1s       48 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-4.a.sanity
+  76.0 TEL |    0.1s       49 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5")'
+  76.0 TEL |    0.1s       50 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-5.a.sanity
+  76.0 TEL |    0.1s       51 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6")'
+  76.0 TEL |    0.1s       52 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-6.a.sanity
+  76.0 TEL |    0.1s       53 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7")'
+  76.0 TEL |    0.1s       54 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-7.a.sanity
+  76.0 TEL |    0.1s       55 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8")'
+  76.0 TEL |    0.1s       56 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-8.a.sanity
+  76.0 TEL |    0.1s       57 python3 -c 'import socket; socket.gethostbyname("hellotelepresence-9")'
+  76.0 TEL |    0.1s   58 sudo -n /usr/bin/pkill -HUP mDNSResponder
+  76.0 TEL |   31.0s   runner.py:754(wait_for_exit)
+  76.0 TEL |    0.0s     59 sudo -n echo -n
+  76.0 TEL |    0.1s   60 umount -f /tmp/tel-stvt8q2l/fs
+  76.0 TEL |    1.0s   61 kubectl --context production --namespace ict-services delete --ignore-not-fou
+  76.0 TEL | (Cleanup) Remove temporary directory
+  76.1 TEL | (Cleanup) Save caches
+  76.9 TEL | (sudo privileges holder thread exiting)
