@@ -1,7 +1,7 @@
-tensorflow
+tensorflow == 2.2.0
 tensorflowjs
 pip >= 21.0.1
-numpy~=1.19.2
+numpy ~= 1.19.2
 matplotlib
 jupyter
 scipy

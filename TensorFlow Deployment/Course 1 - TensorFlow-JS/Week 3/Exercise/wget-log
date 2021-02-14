@@ -1,0 +1,11 @@
+--2021-02-14 10:48:58--  https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip
+Resolving storage.googleapis.com (storage.googleapis.com)... 142.250.186.144, 142.250.185.240, 142.250.186.176, ...
+Connecting to storage.googleapis.com (storage.googleapis.com)|142.250.186.144|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 68606236 (65M) [application/zip]
+Saving to: ‘/tmp/cats_and_dogs_filtered.zip’
+
+s_and_dogs_filtered  69%[============>       ]  45,74M  12,8MB/s    eta 2s     _and_dogs_filtered.  73%[=============>      ]  48,26M  12,8MB/s    eta 2s     and_dogs_filtered.z  77%[==============>     ]  50,83M  12,8MB/s    eta 1s     nd_dogs_filtered.zi  81%[===============>    ]  53,44M  12,8MB/s    eta 1s     d_dogs_filtered.zip  85%[================>   ]  56,01M  12,8MB/s    eta 1s     _dogs_filtered.zip   89%[================>   ]  58,57M  12,8MB/s    eta 1s     dogs_filtered.zip    93%[=================>  ]  61,12M  12,8MB/s    eta 1s     ogs_filtered.zip     97%[==================> ]  63,68M  12,8MB/s    eta 0s     gs_filtered.zip      99%[==================> ]  65,07M  12,4MB/s    eta 0s     /tmp/cats_and_dogs_ 100%[===================>]  65,43M  12,2MB/s    in 5,3s    
+
+2021-02-14 10:49:04 (12,4 MB/s) - ‘/tmp/cats_and_dogs_filtered.zip’ saved [68606236/68606236]
+
